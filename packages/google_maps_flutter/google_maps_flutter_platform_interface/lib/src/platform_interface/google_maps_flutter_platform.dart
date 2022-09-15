@@ -51,6 +51,10 @@ abstract class GoogleMapsFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('init() has not been implemented.');
   }
 
+  Future<void> addKML(String fileName, {required int mapId}) {
+    throw UnimplementedError('addKML() has not been implemented.');
+  }
+
   /// Updates configuration options of the map user interface - deprecated, use
   /// updateMapConfiguration instead.
   ///

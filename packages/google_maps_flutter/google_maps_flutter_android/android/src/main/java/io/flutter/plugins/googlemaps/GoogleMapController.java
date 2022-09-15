@@ -4,6 +4,8 @@
 
 package io.flutter.plugins.googlemaps;
 
+import io.flutter.util.PathUtils;
+import java.io.*;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -34,6 +36,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.maps.android.data.kml.KmlLayer;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
@@ -45,6 +48,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.xmlpull.v1.XmlPullParserException;
+import android.os.Environment;
 
 /** Controller of a single GoogleMaps MapView instance. */
 final class GoogleMapController
@@ -214,6 +219,26 @@ final class GoogleMapController
   @Override
   public void onMethodCall(MethodCall call, MethodChannel.Result result) {
     switch (call.method) {
+		case"map#addKML":
+			String fileName = call.argument("fileName");
+
+			try {
+              String dir = PathUtils.getDataDirectory(context);
+              File file = new File(dir + "/kml/" + fileName);
+
+				  Log.v(TAG, file.getPath());
+
+              FileInputStream fis = new FileInputStream(file);
+              KmlLayer kml = new KmlLayer(googleMap, fis, context);
+
+              kml.addLayerToMap();
+			} catch (XmlPullParserException e) {
+              e.printStackTrace();
+			} catch (IOException e) {
+              e.printStackTrace();
+			}
+
+			break;
       case "map#waitForMap":
         if (googleMap != null) {
           result.success(null);
