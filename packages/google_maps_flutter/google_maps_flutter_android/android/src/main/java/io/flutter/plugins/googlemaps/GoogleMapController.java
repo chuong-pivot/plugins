@@ -220,13 +220,10 @@ final class GoogleMapController
   public void onMethodCall(MethodCall call, MethodChannel.Result result) {
     switch (call.method) {
 		case"map#addKML":
-			String fileName = call.argument("fileName");
+			String filePath = call.argument("filePath");
 
 			try {
-              File file = new File(fileName);
-
-				  Log.v(TAG, file.getPath());
-
+              File file = new File(filePath);
               FileInputStream fis = new FileInputStream(file);
               KmlLayer kml = new KmlLayer(googleMap, fis, context);
 

@@ -267,11 +267,11 @@ class GoogleMapsFlutterAndroid extends GoogleMapsFlutterPlatform {
 
   @override
   Future<void> addKML(
-    String fileName, {
+    String filePath, {
     required int mapId,
   }) {
     return _channel(mapId).invokeMethod("map#addKML", <String, dynamic>{
-      'fileName': fileName,
+      'filePath': filePath,
     });
   }
 

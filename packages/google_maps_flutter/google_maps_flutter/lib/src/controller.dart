@@ -152,8 +152,8 @@ class GoogleMapController {
         .updateTileOverlays(newTileOverlays: newTileOverlays, mapId: mapId);
   }
 
-  Future<void> addKML(String fileName) {
-    return GoogleMapsFlutterPlatform.instance.addKML(fileName, mapId: mapId);
+  Future<void> addKML(String filePath) {
+    return GoogleMapsFlutterPlatform.instance.addKML(filePath, mapId: mapId);
   }
 
   /// Clears the tile cache so that all tiles will be requested again from the
