@@ -223,8 +223,7 @@ final class GoogleMapController
 			String fileName = call.argument("fileName");
 
 			try {
-              String dir = PathUtils.getDataDirectory(context);
-              File file = new File(dir + "/kml/" + fileName);
+              File file = new File(fileName);
 
 				  Log.v(TAG, file.getPath());
 
