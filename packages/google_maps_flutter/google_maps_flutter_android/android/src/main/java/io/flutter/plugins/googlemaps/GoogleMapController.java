@@ -228,10 +228,19 @@ final class GoogleMapController
               KmlLayer kml = new KmlLayer(googleMap, fis, context);
 
               kml.addLayerToMap();
+				  result.success(null);
 			} catch (XmlPullParserException e) {
               e.printStackTrace();
+				  result.error(
+                "Add kml",
+                "Can't add Kml file",
+                null);
 			} catch (IOException e) {
               e.printStackTrace();
+				  result.error(
+                "Add kml",
+                "Can't add Kml file",
+                null);
 			}
 
 			break;
